@@ -104,7 +104,9 @@ export async function generateOpenAICompletions(
   let extract: any;
   let warning: string | undefined;
 
-  const openai = new OpenAI();
+  const openai = new OpenAI({
+    baseURL: process.env.OPENAI_BASE_URL,
+  });
 
   if (markdown === undefined) {
     throw new Error("document.markdown is undefined -- this is unexpected");
@@ -310,7 +312,9 @@ export function removeDefaultProperty(schema: any): any {
 }
 
 export async function generateSchemaFromPrompt(prompt: string): Promise<any> {
-  const openai = new OpenAI();
+  const openai = new OpenAI({
+    baseURL: process.env.OPENAI_BASE_URL,
+  });
 
   const temperatures = [0, 0.1, 0.3]; // Different temperatures to try
   let lastError: Error | null = null;

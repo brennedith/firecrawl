@@ -7,7 +7,9 @@ import {
 } from "../build-prompts";
 import OpenAI from "openai";
 import { logger } from "../../../lib/logger";
-const openai = new OpenAI();
+const openai = new OpenAI({
+  baseURL: process.env.OPENAI_BASE_URL,
+});
 
 export async function analyzeSchemaAndPrompt(
   urls: string[],

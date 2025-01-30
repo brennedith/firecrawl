@@ -24,7 +24,9 @@ export async function generateCompletions(
     documents.map(async (document: Document) => {
       switch (switchVariable) {
         case "openAI":
-          const llm = new OpenAI();
+          const llm = new OpenAI({
+            baseURL: process.env.OPENAI_BASE_URL,
+          });
           try {
             const completionResult = await generateOpenAICompletions({
               client: llm,
@@ -66,7 +68,9 @@ export async function generateCompletions(
 // generate basic completion
 
 export async function generateBasicCompletion(prompt: string) {
-  const openai = new OpenAI();
+  const openai = new OpenAI({
+    baseURL: process.env.OPENAI_BASE_URL,
+  });
   const model = "gpt-4o";
 
   const completion = await openai.chat.completions.create({
